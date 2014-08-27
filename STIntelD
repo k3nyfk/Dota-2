@@ -1,0 +1,157 @@
+package com.example.dota2;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
+
+import com.example.heroesfragmentsclass.AncientApparition;
+import com.example.heroesfragmentsclass.Bane;
+import com.example.heroesfragmentsclass.Batrider;
+import com.example.heroesfragmentsclass.DarkSeer;
+import com.example.heroesfragmentsclass.Dazzle;
+import com.example.heroesfragmentsclass.DeathProphet;
+import com.example.heroesfragmentsclass.Enigma;
+import com.example.heroesfragmentsclass.Invoker;
+import com.example.heroesfragmentsclass.Leshrac;
+import com.example.heroesfragmentsclass.Lich;
+import com.example.heroesfragmentsclass.Lion;
+import com.example.heroesfragmentsclass.Necrophos;
+import com.example.heroesfragmentsclass.OutworldDevourer;
+import com.example.heroesfragmentsclass.Pugna;
+import com.example.heroesfragmentsclass.QueenOfPain;
+import com.example.heroesfragmentsclass.ShadowDemon;
+import com.example.heroesfragmentsclass.Visage;
+import com.example.heroesfragmentsclass.Warlock;
+import com.example.heroesfragmentsclass.WitchDoctor;
+
+/**
+ * Created by Kenny Desktop on 8/18/2014.
+ */
+public class STIntelligenceD extends FragmentActivity{
+
+    ViewPager viewPager;
+    int setPosition;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.stintelligenced);
+
+        viewPager = (ViewPager) findViewById(R.id.pagerIntelligenceDFull);
+        viewPager.setAdapter(new AgilityDFullAdapter(getSupportFragmentManager()));
+
+        Bundle gotBasket1 = getIntent().getExtras();
+        setPosition = gotBasket1.getInt("position");
+        viewPager.setCurrentItem(setPosition);
+    }
+
+    private class AgilityDFullAdapter extends FragmentStatePagerAdapter {
+        public AgilityDFullAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        String[] HeroNames = getResources().getStringArray(R.array.Intel_Heroes_Dire);
+
+        Bundle gotBasket2 = getIntent().getExtras();
+        int HeroSize = gotBasket2.getInt("size");
+
+        @Override
+        public Fragment getItem(int position) {
+
+            Fragment fragment = null;
+            switch (position){
+                case 0:
+                    fragment = new AncientApparition();
+                    break;
+
+                case 1:
+                    fragment = new Bane();
+                    break;
+
+                case 2:
+                    fragment = new Batrider();
+                    break;
+
+                case 3:
+                    fragment = new DarkSeer();
+                    break;
+
+                case 4:
+                    fragment = new Dazzle();
+                    break;
+
+                case 5:
+                    fragment = new DeathProphet();
+                    break;
+
+                case 6:
+                    fragment = new Enigma();
+                    break;
+
+                case 7:
+                    fragment = new Invoker();
+                    break;
+
+                case 8:
+                    fragment = new Leshrac();
+                    break;
+
+                case 9:
+                    fragment = new Lich();
+                    break;
+
+                case 10:
+                    fragment = new Lion();
+                    break;
+
+                case 11:
+                    fragment = new Necrophos();
+                    break;
+
+                case 12:
+                    fragment = new OutworldDevourer();
+                    break;
+
+                case 13:
+                    fragment = new Pugna();
+                    break;
+
+                case 14:
+                    fragment = new QueenOfPain();
+                    break;
+
+                case 15:
+                    fragment = new ShadowDemon();
+                    break;
+
+                case 16:
+                    fragment = new Visage();
+                    break;
+
+                case 17:
+                    fragment = new Warlock();
+                    break;
+
+                case 18:
+                    fragment = new WitchDoctor();
+                    break;
+
+            }
+
+            return fragment;
+        }
+
+        @Override
+        public int getCount() {
+            return HeroSize;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+                return HeroNames[position];
+        }
+    }
+}
