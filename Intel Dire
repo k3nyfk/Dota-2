@@ -1,0 +1,83 @@
+package com.example.dota2;
+
+
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+
+/**
+ * A simple {@link Fragment} subclass.
+ *
+ */
+public class IntelDire extends Fragment {
+
+    public IntelDire() {
+        // Required empty public constructor
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_intel_dire, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        final Bundle basket1 = new Bundle();
+        final Bundle basket2 = new Bundle();
+        GridView grid;
+        final String[] HeroNames = getResources().getStringArray(R.array.Intel_Heroes_Dire);
+
+                                    /*{getResources().getString(R.string.ANCIENT_APPARITION),  getResources().getString(R.string.BANE),    getResources().getString(R.string.BATRIDER),
+                                    getResources().getString(R.string.DARK_SEER),   getResources().getString(R.string.DAZZLE),  getResources().getString(R.string.DEATH_PROPHET),
+                                    getResources().getString(R.string.ENIGMA),  getResources().getString(R.string.INVOKER), getResources().getString(R.string.LESHRAC),
+                                    getResources().getString(R.string.LICH),    getResources().getString(R.string.LION),    getResources().getString(R.string.NECROPHOS),
+                                    getResources().getString(R.string.OUTWORLD_DEVOURER),   getResources().getString(R.string.PUGNA),   getResources().getString(R.string.QUEEN_OF_PAIN),
+                                    getResources().getString(R.string.SHADOW_DEMON),    getResources().getString(R.string.VISAGE),  getResources().getString(R.string.WARLOCK),
+                                    getResources().getString(R.string.WITCH_DOCTOR)
+        };*/
+
+        int[] HeroIcons = {
+                R.drawable.aa_circ, R.drawable.bane_circ, R.drawable.bat_circ,
+                R.drawable.ds_circ, R.drawable.dazzle_circ, R.drawable.dp_circ,
+                R.drawable.enigma_circ, R.drawable.invo_circ, R.drawable.lesh_circ,
+                R.drawable.lich_circ, R.drawable.lion_circ, R.drawable.necro_circ,
+                R.drawable.od_circ, R.drawable.pugna_circ, R.drawable.qop_circ,
+                R.drawable.sd_circ, R.drawable.visage_circ, R.drawable.warlock_circ,
+                R.drawable.wd_circ
+        };
+
+        CustomGrid adapter = new CustomGrid(getActivity(), HeroNames, HeroIcons);
+        grid = (GridView) getActivity().findViewById(R.id.gvIntelDire);
+        grid.setAdapter(adapter);
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getActivity(), "" + HeroNames[+i], Toast.LENGTH_SHORT).show();
+                basket1.putInt("position", i);
+                basket2.putInt("size", HeroNames.length);
+                Intent iSTIntelligence = new Intent(getActivity(), STIntelligenceD.class);
+                iSTIntelligence.putExtras(basket1);
+                iSTIntelligence.putExtras(basket2);
+                startActivity(iSTIntelligence);
+            }
+        });
+
+    }
+}
